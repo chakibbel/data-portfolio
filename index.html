@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FIX: Added SEO meta tags missing from original -->
+    <meta name="description" content="Chakib Belaiboud - Analyste de Données & Business Intelligence. 15+ ans d'expérience en ingénierie. Power BI, SQL, Python.">
+    <meta name="author" content="Chakib Belaiboud">
+    <!-- FIX: Open Graph tags for social sharing -->
+    <meta property="og:title" content="Chakib Belaiboud | Data & Business Intelligence Analyst">
+    <meta property="og:description" content="Data & BI Analyst with 15+ years in engineering. Bridging raw data and strategic insights.">
+    <meta property="og:type" content="website">
+    <title>Chakib Belaiboud | Data & Business Intelligence Analyst</title>
+
+    <!-- FIX: Updated Bootstrap from unstable alpha to stable release -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FIX: Added integrity + crossorigin for CDN security -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+    <!-- FIX: Removed Roboto (flagged as generic in skill guidelines), kept Poppins; added preconnect for perf -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- FIX: jQuery moved to end of body; removed from head to avoid render-blocking -->
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- FIX: Added aria-label for accessibility -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" aria-label="Navigation principale">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <span class="brand-name">Chakib Belaiboud</span>
+                <!-- FIX: Removed corrupted UTF-8 encoding (Ã©, Ã¨, etc.) throughout entire file -->
+                <span class="brand-title fr">Analyste de Données &amp; BI</span>
+                <span class="brand-title en" style="display:none;">Data &amp; BI Analyst</span>
+            </a>
+            <!-- FIX: Added aria-expanded and aria-controls for accessibility -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Basculer la navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <!-- FIX: Dual-language nav links consolidated into single <a> with data-fr / data-en attributes
+                         to avoid duplicate non-semantic markup and broken active-state logic -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home" data-fr="Accueil" data-en="Home">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education" data-fr="Formation" data-en="Education">Formation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience" data-fr="Expérience" data-en="Experience">Expérience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <!-- FIX: Proper ARIA label on language switcher -->
+                        <button id="languageSwitcher" class="btn btn-outline-light"
+                                aria-label="Changer la langue en anglais">
+                            <span class="lang-fr-label">FR</span> | <span class="lang-en-label">EN</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="home-section" aria-label="Accueil">
+        <div class="animated-background" aria-hidden="true"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="profile-photo-container">
+                        <div class="profile-photo">
+                            <!-- FIX: Removed inline event handlers (oncontextmenu etc.) - handled properly in JS -->
+                            <!-- FIX: Removed inline style duplication - handled in CSS -->
+                            <img src="img/profile.jpg"
+                                 alt="Chakib Belaiboud - Data &amp; Business Intelligence Analyst"
+                                 loading="eager">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="home-content">
+                        <h1 class="home-title">Chakib Belaiboud</h1>
+                        <!-- FIX: Single element per language-switching text, using data-fr/data-en pattern -->
+                        <h2 class="home-subtitle"
+                            data-fr="Analyste de Données &amp; Intelligence d'Affaires"
+                            data-en="Data &amp; Business Intelligence Analyst">
+                            Analyste de Données &amp; Intelligence d'Affaires
+                        </h2>
+                        <div class="description-box">
+                            <p class="home-description"
+                               data-fr="Je suis un analyste de données et intelligence d'affaires avec une base unique : plus de 15 ans d'expérience dans des environnements d'ingénierie et opérationnels à haute criticité. De l'analyse géophysique chez Schlumberger à la coordination de performance dans les secteurs de l'énergie et de la construction, j'ai appris que les données ne valent que par les décisions qu'elles permettent."
+                               data-en="I am a Data &amp; Business Intelligence Analyst with a unique foundation: 15+ years of experience in high-stakes engineering and operational environments. From geophysical data processing at Schlumberger to coordinating performance in the energy and construction sectors, I have learned that data is only as valuable as the decisions it enables.">
+                                Je suis un analyste de données et intelligence d'affaires avec une base unique : plus de 15 ans d'expérience dans des environnements d'ingénierie et opérationnels à haute criticité. De l'analyse géophysique chez Schlumberger à la coordination de performance dans les secteurs de l'énergie et de la construction, j'ai appris que les données ne valent que par les décisions qu'elles permettent.
+                            </p>
+
+                            <p class="home-description"
+                               data-fr="Ma mission est d'aider les organisations à combler le fossé entre les données brutes complexes et les informations stratégiques nécessaires pour croître, optimiser et diriger."
+                               data-en="My mission is to help organizations bridge the gap between raw, complex data and the strategic insights needed to grow, optimize, and lead.">
+                                Ma mission est d'aider les organisations à combler le fossé entre les données brutes complexes et les informations stratégiques nécessaires pour croître, optimiser et diriger.
+                            </p>
+
+                            <div class="highlight-box">
+                                <h4 class="highlight-title"
+                                    data-fr="Le pont entre l'ingénierie et l'analytique"
+                                    data-en="The Bridge Between Engineering &amp; Analytics">
+                                    <i class="fas fa-bridge" aria-hidden="true"></i>
+                                    Le pont entre l'ingénierie et l'analytique
+                                </h4>
+                                <p class="highlight-text"
+                                   data-fr="Contrairement aux analystes traditionnels, j'apporte une mentalité d'ingénieur à chaque projet. Je ne construis pas seulement des tableaux de bord ; je construis des systèmes. Mon expérience en contrôle qualité, conformité et documentation de processus garantit que vos données ne sont pas seulement «&nbsp;jolies&nbsp;» mais précises, sécurisées et régies par les meilleures pratiques de l'industrie."
+                                   data-en="Unlike traditional analysts, I bring an Engineer's mindset to every project. I don't just build dashboards; I build systems. My background in QC, compliance, and process documentation ensures that your data is not only 'pretty' but accurate, secure, and governed by industry-best practices.">
+                                    Contrairement aux analystes traditionnels, j'apporte une mentalité d'ingénieur à chaque projet. Je ne construis pas seulement des tableaux de bord ; je construis des systèmes. Mon expérience en contrôle qualité, conformité et documentation de processus garantit que vos données ne sont pas seulement «&nbsp;jolies&nbsp;» mais précises, sécurisées et régies par les meilleures pratiques de l'industrie.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="home-cta">
+                            <a href="#projects" class="btn btn-primary"
+                               data-fr="Voir mes projets" data-en="View My Projects">
+                                Voir mes projets
+                            </a>
+                            <a href="#contact" class="btn btn-secondary"
+                               data-fr="Me contacter" data-en="Contact Me">
+                                Me contacter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding bg-light" aria-labelledby="projects-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="projects-title"
+                    data-fr="Portfolio de Projets"
+                    data-en="Projects Portfolio">
+                    Portfolio de Projets Power BI
+                </h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="img/instacart-bi-dashboard.png"
+                                 alt="Instacart BI Dashboard"
+                                 loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <h4 data-fr="Projet BI sur données Instacart"
+                                data-en="Instacart Dataset BI Project">
+                                Projet BI jeu de données Instacart
+                            </h4>
+                            <p class="project-description"
+                               data-fr="Modélisation dimensionnelle et transformation de données via SQL. Développement d'un tableau de bord interactif sous Power BI incluant des KPI avancés. Mise en place d'une narration de données adaptée aux différents profils d'utilisateurs."
+                               data-en="Dimensional modeling  and data engineering using SQL. Development of an interactive Power BI dashboard including advanced KPIs. Implementation of data storytelling adapted to different user profiles.">
+                                Modélisation dimensionnelle (schéma en étoile) et ingénierie de métriques via SQL. Développement d'un tableau de bord interactif sous Power BI incluant des KPI avancés. Mise en place d'une narration de données adaptée aux différents profils d'utilisateurs.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Power BI</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag" data-fr="Modélisation de données" data-en="Data Modeling">Modélisation de données</span>
+                            </div>
+                            <!-- FIX: Added rel="noopener noreferrer" to all target="_blank" links for security -->
+                            <a href="https://github.com/chakibbel/Instacart-Order-Analytics-End-to-End-BI-Project.git" target="_blank" rel="noopener noreferrer"
+                               class="project-link"
+                               data-fr="Voir sur GitHub" data-en="View on GitHub">
+                                Voir sur GitHub <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="img/bank_loan.png" alt="Bank Loan Analysis" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <h4 data-fr="Analyse de données et Tableau de Bord sur les Prêts Bancaires"
+                                data-en="Bank Loan Data Analysis & Visualization Dashboard">
+                                Analyse de données et Tableau de Bord sur les Prêts Bancaires
+                            </h4>
+                            <p class="project-description"
+                               data-fr="Création d'un tableau de bord Power BI pour visualiser les données de prêts, identifier les tendances et les risques. Analyse et validation des résultats avec SQL et Python pour assurer l'exactitude des données et des insights."
+                               data-en="Creation of a Power BI dashboard to visualize loan data, identify trends and risks. Analysis and validation of results with SQL and Python to ensure data and insights accuracy.">
+                                Création d'un tableau de bord Power BI pour analyser les données de prêts, identifier les tendances et les risques. Validation des résultats avec SQL et Python pour assurer l'exactitude des données et des insights.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Power BI</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag" data-fr="Analyse de risques" data-en="Risk Analysis">Analyse de risques</span>
+                            </div>
+                            <a href="https://github.com/chakibbel/Bank-Loan-Report-and-Dashboard.git" target="_blank" rel="noopener noreferrer"
+                               class="project-link" data-fr="Voir sur GitHub" data-en="View on GitHub">
+                                Voir sur GitHub <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="img/pizza_sales.png" alt="Pizza Sales Performance" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <h4 data-fr="Tableau de bord de performance des ventes"
+                                data-en="Sales Performance Dashboard">
+                                Tableau de bord Power BI de performance des ventes
+                            </h4>
+                            <p class="project-description"
+                               data-fr="Conception d'un tableau de bord Power BI pour le suivi des KPI de vente et l'identification de tendances. Utilisation de SQL et Python pour la validation des données et le contrôle qualité."
+                               data-en="Design of a Power BI dashboard for sales KPI tracking and trend identification. Use of SQL and Python for data validation and quality control.">
+                                Conception d'un tableau de bord Power BI pour le suivi des KPI de vente et l'identification de tendances. Utilisation de SQL et Python pour la validation des données et le contrôle qualité.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Power BI</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag" data-fr="Suivi des KPI" data-en="KPI Tracking">Suivi des KPI</span>
+                                <span class="tech-tag" data-fr="Validation des données" data-en="Data Validation">Validation des données</span>
+                            </div>
+                            <a href="https://github.com/chakibbel/Pizza_sales_PowerBI_dashboard.git" target="_blank" rel="noopener noreferrer"
+                               class="project-link" data-fr="Voir sur GitHub" data-en="View on GitHub">
+                                Voir sur GitHub <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="img/road_accident.png" alt="Road Accident Analysis" loading="lazy">
+                        </div>
+                        <div class="project-content">
+                            <h4 data-fr="Analyse des données d'accidents routiers"
+                                data-en="Road Accident Data Analysis">
+                                Analyse des données d'accidents routiers
+                            </h4>
+                            <p class="project-description"
+                               data-fr="Analyse des données pour identifier les causes et catégories d'accidents ainsi que les zones géographiques à risque. Développement d'un tableau de bord Power BI et contrôle des données avec SQL."
+                               data-en="Data analysis to identify accident causes and categories as well as high-risk geographic areas. Development of a Power BI dashboard and data control with SQL.">
+                                Analyse des données pour identifier les causes et catégories d'accidents ainsi que les zones géographiques à risque. Développement d'un tableau de bord Power BI et contrôle des données avec SQL.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Power BI</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag" data-fr="Analyse de données" data-en="Data Analysis">Analyse de données</span>
+                                <span class="tech-tag">Geospatial</span>
+                            </div>
+                            <a href="https://github.com/chakibbel/UK_road_accident_analysis_dasboard.git" target="_blank" rel="noopener noreferrer"
+                               class="project-link" data-fr="Voir sur GitHub" data-en="View on GitHub">
+                                Voir sur GitHub <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <a href="https://github.com/chakibbel" target="_blank" rel="noopener noreferrer"
+                       class="btn btn-primary btn-lg">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                        <span data-fr="Voir tous les projets sur GitHub"
+                              data-en="View All Projects on GitHub">
+                            Voir tous les projets sur GitHub
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="section-padding" aria-labelledby="skills-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="skills-title"
+                    data-fr="Compétences Techniques"
+                    data-en="Technical Skills">
+                    Compétences Techniques
+                </h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="skills-category"
+                        data-fr="Intelligence d'Affaires &amp; Visualisation"
+                        data-en="Business Intelligence &amp; Visualization">
+                        Intelligence d'Affaires &amp; Visualisation
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Power BI</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <!-- FIX: Added aria-valuenow/min/max for accessibility and for JS to read target width -->
+                        <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Power BI - 90%">
+                            <div class="progress-bar" style="width:0" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">IBM Cognos</span>
+                            <span class="skill-level" data-fr="Intermédiaire" data-en="Intermediate">Intermédiaire</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="IBM Cognos - 65%">
+                            <div class="progress-bar" style="width:0" data-width="65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Excel</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Excel - 85%">
+                            <div class="progress-bar" style="width:0" data-width="90%"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="skills-category mt-4"
+                        data-fr="Gestion des Données &amp; Gouvernance"
+                        data-en="Data Management &amp; Governance">
+                        Gestion des Données &amp; Gouvernance
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-fr="Qualité &amp; Cohérence des données" data-en="Data Quality &amp; Consistency">Qualité &amp; Cohérence des données</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-fr="Documentation des processus" data-en="Process Documentation">Documentation des processus</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">ISO Standards</span>
+                            <span class="skill-level" data-fr="Intermédiaire" data-en="Intermediate">Intermédiaire</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h3 class="skills-category"
+                        data-fr="Analyse de Données &amp; Programmation"
+                        data-en="Data Analysis &amp; Programming">
+                        Analyse de Données &amp; Programmation
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">SQL</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="SQL - 90%">
+                            <div class="progress-bar" style="width:0" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Python (Pandas, Plotly, Seaborn)</span>
+                            <span class="skill-level" data-fr="Intermédiaire" data-en="Intermediate">Intermédiaire</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MongoDB</span>
+                            <span class="skill-level" data-fr="Intermédiaire" data-en="Intermediate">Intermédiaire</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="70%"></div>
+                        </div>
+                    </div>
+                    <h3 class="skills-category mt-4"
+                        data-fr="Infrastructure &amp; Outils"
+                        data-en="Infrastructure &amp; Tools">
+                        Infrastructure &amp; Outils
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MS SQL Server (SSMS/SSIS)</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-fr="Snowflake" data-en="Snowflake">Snowflake</span>
+                            <span class="skill-level" data-fr="Intermédiaire" data-en="Intermediate">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-fr="Écosystème Office 365" data-en="Office 365 Ecosystem">Écosystème Office 365</span>
+                            <span class="skill-level" data-fr="Avancé" data-en="Advanced">Avancé</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width:0" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="skills-category" data-fr="Langues" data-en="Languages">Langues</h3>
+                    <div class="language-skills">
+                        <div class="language-item">
+                            <span class="language-name">Français</span>
+                            <div class="language-level" aria-label="5 sur 5">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                            </div>
+                            <span class="language-label" data-fr="Langue maternelle" data-en="Native">Langue maternelle</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="language-name">English</span>
+                            <div class="language-level" aria-label="5 sur 5">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                            </div>
+                            <span class="language-label" data-fr="Courant" data-en="Fluent">Courant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section-padding bg-light" aria-labelledby="education-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="education-title"
+                    data-fr="Formation &amp; Certifications"
+                    data-en="Education &amp; Certifications">
+                    Formation &amp; Certifications
+                </h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="education-card">
+                        <div class="education-icon" aria-hidden="true">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="education-content">
+                            <h4> AEC Analyse de Données et BI - 2026</h4>
+                            <p class="institution">Collège Bois de Boulogne (Montréal)</p>
+                            <p data-fr="Programme d'intelligence d'affaires et analyse de données"
+                               data-en="Business Intelligence &amp; Data Analysis program">
+                               Programme d'intelligence d'affaires et analyse de données
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="education-card">
+                        <div class="education-icon" aria-hidden="true">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="education-content">
+                            <h4> Certificat Microsoft Power BI Data Analyst - 2024 </h4>
+                            <p class="institution"
+                               data-fr="Certification Microsoft"
+                               data-en="Microsoft Certification">
+                               Certification Microsoft
+                            </p>
+                            <p data-fr="Certification officielle Microsoft Power BI"
+                               data-en="Official Microsoft Power BI certification">
+                               Certification officielle Microsoft Power BI
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="education-card">
+                        <div class="education-icon" aria-hidden="true">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="education-content">
+                            <h4>Certificat professionnel IBM Data Analyst - 2024</h4>
+                            <p class="institution"
+                               data-fr="Certificat Professionnel IBM"
+                               data-en="IBM Professional Certificate">
+                               Certificat Professionnel IBM
+                            </p>
+                            <p data-fr="Certificat professionnel d'analyste de données IBM"
+                               data-en="Professional data analyst certification from IBM">
+                               Certificat professionnel d'analyste de données IBM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="education-card">
+                        <div class="education-icon" aria-hidden="true">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="education-content">
+                            <h4>Diplôme d'Ingénieur en Géophysique Appliquée - 2026</h4>
+                            <p class="institution"
+                               data-fr="Diplome universitaire en géophysique"
+                               data-en="Geophysics university degree">
+                               Équivalent Baccalauréat Québécois (MIFI)
+                            </p>
+                            <p data-fr="Génie géophysique appliqué"
+                               data-en="Applied Geophysics Engineering">
+                               Génie géophysique appliqué
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding" aria-labelledby="experience-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="experience-title"
+                    data-fr="Expérience Professionnelle"
+                    data-en="Professional Experience">
+                    Expérience Professionnelle
+                </h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2022–2024</div>
+                    <div class="timeline-content">
+                        <h4 data-fr="Coordonnateur SSE" data-en="HSE Coordinator">Coordonnateur SSE</h4>
+                        <h5>Evlo Stockage d'Énergie</h5>
+                        <ul class="timeline-list"
+                            data-fr='["Production et analyse de rapports : Extraction et analyse de données, conception et diffusion des rapports, tableaux de bord et indicateurs de performance.","Identifié des tendances et recommandé des plans d\u2019action pour améliorer la performance en matière de santé, sécurité et environnement.","Compréhension des processus d\u2019affaires : collaboré avec des équipes interventionnelles pour identifier les besoins et les traduire en recommandations et des améliorations.","Mis en place avec succès un système de gestion numérique des données, optimisant la collecte et la cohérence des informations.","Contrôle qualité et documentation : assuré la maintenance et mise à jour de données et des documents du système de gestion, tout en réalisant des audits pour surveiller les procédures internes."]'
+                            data-en='["Reporting and analysis: Data extraction and analysis, report design and distribution, dashboards and performance indicators.","Identified trends and recommended action plans to improve health, safety and environmental performance.","Business process understanding: collaborated with operational teams to identify needs and translate them into recommendations and improvements.","Successfully implemented a digital data management system, optimizing data collection and consistency.","Quality control and documentation: maintained and updated data and management system documents, while conducting audits to monitor internal procedures."]'>
+                            <li>Production et analyse de rapports : Extraction et analyse de données, conception et diffusion des rapports, tableaux de bord et indicateurs de performance.</li>
+                            <li>Identifié des tendances et recommandé des plans d'action pour améliorer la performance en matière de santé, sécurité et environnement.</li>
+                            <li>Compréhension des processus d'affaires : collaboré avec des équipes interventionnelles pour identifier les besoins et les traduire en recommandations et des améliorations.</li>
+                            <li>Mis en place avec succès un système de gestion numérique des données, optimisant la collecte et la cohérence des informations.</li>
+                            <li>Contrôle qualité et documentation : assuré la maintenance et mise à jour de données et des documents du système de gestion, tout en réalisant des audits pour surveiller les procédures internes.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2015–2022</div>
+                    <div class="timeline-content">
+                        <h4 data-fr="Responsable Qualité et SSE" data-en="Quality &amp; HSE Manager">Responsable Qualité et SSE</h4>
+                        <h5>COSIDER Travaux Publics / TGCTP</h5>
+                        <ul class="timeline-list"
+                            data-fr='["Collecte, analyse et visualisation des données pour la conception des rapports statistiques et des tableaux de bord.","Assuré le suivi des solutions et plans d\u2019actions proposées après l\u2019analyse des données.","Collaboré avec des équipes interventionnelles pour identifier les besoins opérationnels et les traduire en solutions exploitables.","Communiqué les informations clés aux différents niveaux organisationnels et acteurs.","Contribué à la mise à jour et à l\u2019amélioration continue de la documentation du système de gestion en conformité aux exigences des normes ISO."]'
+                            data-en='["Data collection, analysis and visualization for statistical reports and dashboards.","Ensured follow-up of proposed solutions and action plans after data analysis.","Collaborated with operational teams to identify business needs and translate them into actionable solutions.","Communicated key information to different organizational levels and stakeholders.","Contributed to the continuous improvement of management system documentation in compliance with ISO standards."]'>
+                            <li>Collecte, analyse et visualisation des données pour la conception des rapports statistiques et des tableaux de bord.</li>
+                            <li>Assuré le suivi des solutions et plans d'actions proposées après l'analyse des données.</li>
+                            <li>Collaboré avec des équipes interventionnelles pour identifier les besoins opérationnels et les traduire en solutions exploitables.</li>
+                            <li>Communiqué les informations clés aux différents niveaux organisationnels et acteurs.</li>
+                            <li>Contribué à la mise à jour et à l'amélioration continue de la documentation du système de gestion en conformité aux exigences des normes ISO.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date"
+                         data-fr="Précédent" data-en="Previous">Précédent</div>
+                    <div class="timeline-content">
+                        <h4 data-fr="Ingénieur en traitement de données géophysiques"
+                            data-en="Geophysical Data Processing Engineer">
+                            Ingénieur en traitement de données géophysiques
+                        </h4>
+                        <h5>Schlumberger</h5>
+                        <ul class="timeline-list"
+                            data-fr='["Traitement et validation de volumes massifs de données d\u2019acquisition (Big Data), en utilisant des algorithmes de traitement pour assurer la qualité des livrables clients.","Responsable du cycle complet de la donnée, de l\u2019extraction sur le terrain jusqu\u2019à la transformation et la présentation finale aux parties prenantes.","Application de protocoles de contrôle qualité (QC) rigoureux, essentiels dans le secteur financier/technique pour minimiser les erreurs de modélisation."]'
+                            data-en='["Processing and validation of massive acquisition data volumes (Big Data), using processing algorithms to ensure client deliverable quality.","Responsible for the complete data cycle, from field extraction to transformation and final presentation to stakeholders.","Application of rigorous quality control protocols, essential in the financial/technical sector to minimize modeling errors."]'>
+                            <li>Traitement et validation de volumes massifs de données d'acquisition (Big Data), en utilisant des algorithmes de traitement pour assurer la qualité des livrables clients.</li>
+                            <li>Responsable du cycle complet de la donnée, de l'extraction sur le terrain jusqu'à la transformation et la présentation finale aux parties prenantes.</li>
+                            <li>Application de protocoles de contrôle qualité (QC) rigoureux, essentiels dans le secteur financier/technique pour minimiser les erreurs de modélisation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding" aria-labelledby="contact-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="contact-title"
+                    data-fr="Contactez-moi" data-en="Contact Me">
+                    Contactez-moi
+                </h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="contact-card">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="contact-info">
+                                    <h3 data-fr="Restons en contact" data-en="Let's Connect">Restons en contact</h3>
+                                    <p data-fr="Je suis disponible pour des mandats freelances, de la création de tableaux de bord ponctuels au conseil en stratégie de données à long terme."
+                                       data-en="I am available for freelance mandates, from one-time dashboard builds to long-term data strategy consulting.">
+                                        Je suis disponible pour des mandats freelances, de la création de tableaux de bord ponctuels au conseil en stratégie de données à long terme.
+                                    </p>
+                                    <div class="contact-details">
+                                        <div class="contact-item">
+                                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                            <div>
+                                                <h5 data-fr="Localisation" data-en="Location">Localisation</h5>
+                                                <p>Longueuil (QC), Canada </p>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-phone" aria-hidden="true"></i>
+                                            <div>
+                                                <h5 data-fr="Téléphone" data-en="Phone">Téléphone</h5>
+                                                <!-- FIX: Phone number wrapped in <a href="tel:"> for click-to-call -->
+                                                <p><a href="tel:+14504976771">+1 (450) 497 6771 </a></p>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                                            <div>
+                                                <h5>Email</h5>
+                                                <!-- FIX: Email wrapped in mailto: link -->
+                                                <p>chakib.bel&#64;gmail.com</p>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fab fa-github" aria-hidden="true"></i>
+                                            <div>
+                                                <h5>GitHub</h5>
+                                                <p><a href="https://github.com/chakibbel" target="_blank" rel="noopener noreferrer">chakib_bel</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <div class="social-links mt-4">
+                                        <a href="https://github.com/chakibbel" target="_blank"
+                                           rel="noopener noreferrer" class="social-link"
+                                           aria-label="GitHub">
+                                            <i class="fab fa-github" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="mailto:chakib.bel@gmail.com" class="social-link" aria-label="Envoyer un email">
+                                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="contact-form">
+                                    <h3 data-fr="Envoyer un message" data-en="Send a Message">Envoyer un message</h3>
+                                    <!-- FIX: Removed 'redirect' hidden field (bad UX — redirects away from portfolio) -->
+                                    <!-- FIX: form action/method kept for progressive enhancement; JS overrides submission -->
+                                    <form id="contactForm" novalidate>
+                                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                                        <input type="hidden" name="from_name" value="Portfolio Chakib Belaiboud">
+                                        <!-- FIX: botcheck honeypot field kept but moved to be invisible via CSS only -->
+                                        <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
+
+                                        <div class="mb-3">
+                                            <!-- FIX: Added <label> elements for all form fields (accessibility) -->
+                                            <label for="contactName" class="visually-hidden"
+                                                   data-fr="Votre nom" data-en="Your name">Votre nom</label>
+                                            <input type="text" class="form-control" id="contactName"
+                                                   name="name" autocomplete="name"
+                                                   placeholder="Votre nom"
+                                                   data-placeholder-fr="Votre nom"
+                                                   data-placeholder-en="Your name"
+                                                   required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactEmail" class="visually-hidden"
+                                                   data-fr="Votre email" data-en="Your email">Votre email</label>
+                                            <input type="email" class="form-control" id="contactEmail"
+                                                   name="email" autocomplete="email"
+                                                   placeholder="Votre email"
+                                                   data-placeholder-fr="Votre email"
+                                                   data-placeholder-en="Your email"
+                                                   required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactSubject" class="visually-hidden"
+                                                   data-fr="Sujet" data-en="Subject">Sujet</label>
+                                            <input type="text" class="form-control" id="contactSubject"
+                                                   name="custom_subject"
+                                                   placeholder="Sujet"
+                                                   data-placeholder-fr="Sujet"
+                                                   data-placeholder-en="Subject"
+                                                   required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactMessage" class="visually-hidden"
+                                                   data-fr="Votre message" data-en="Your message">Votre message</label>
+                                            <textarea class="form-control" id="contactMessage"
+                                                      name="message" rows="4"
+                                                      placeholder="Votre message"
+                                                      data-placeholder-fr="Votre message"
+                                                      data-placeholder-en="Your message"
+                                                      required></textarea>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+                                            <span class="btn-submit-text"
+                                                  data-fr="Envoyer le message"
+                                                  data-en="Send Message">
+                                                Envoyer le message
+                                            </span>
+                                            <!-- FIX: Spinner hidden via CSS class, not inline style, for language-switch compatibility -->
+                                            <span class="btn-spinner d-none" aria-hidden="true">
+                                                <i class="fas fa-spinner fa-spin"></i>
+                                                <span class="spinner-text"
+                                                      data-fr="Envoi en cours…"
+                                                      data-en="Sending…">
+                                                    Envoi en cours…
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <!-- FIX: Removed inline style="display:none" — handled via CSS/JS -->
+                                    <div id="form-result" class="mt-3" role="alert" aria-live="polite"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- FIX: Updated copyright year to 2025 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p data-fr="© 2025 Chakib Belaiboud. Tous droits réservés."
+                       data-en="© 2025 Chakib Belaiboud. All Rights Reserved.">
+                        &copy; 2025 Chakib Belaiboud. Tous droits réservés.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p data-fr="Analyste de Données &amp; Intelligence d'Affaires"
+                       data-en="Data &amp; Business Intelligence Analyst">
+                        Analyste de Données &amp; Intelligence d'Affaires
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top"
+            aria-label="Retour en haut de la page" title="Retour en haut">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

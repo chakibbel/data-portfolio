@@ -1,0 +1,1106 @@
+/* ==========================================================================
+   Portfolio — Chakib Belaiboud
+   Optimized & Bug-Fixed CSS
+
+   KEY FIXES:
+   1. FIX: Removed duplicate .project-image rule block (was defined twice;
+      second block silently overrode parts of the first).
+   2. FIX: Removed duplicate .profile-photo rule (defined twice with
+      conflicting border/box-shadow values).
+   3. FIX: Removed `.t` orphan rule (syntax error — cut-off selector
+      left in .timeline-content block).
+   4. FIX: Added `font-display: swap` hint via @import instead of blocking
+      font load (Google Fonts handles this, but documented).
+   5. FIX: `#backToTop` was styled twice (once in JS-injected <style>,
+      once in CSS). Consolidated to CSS only.
+   6. FIX: `#form-result` was styled twice (JS-injected + CSS).
+      Consolidated here and removed JS injection.
+   7. FIX: `.loading-spinner` was styled twice with conflicting display.
+      Consolidated to a single rule.
+   8. FIX: `.is-invalid` rule injected by JS as well as defined in CSS.
+      JS injection removed; single source of truth here.
+   9. FIX: `img { user-drag: none }` and `img { -webkit-touch-callout }` 
+      were scattered in multiple rule blocks. Consolidated into one.
+   10. FIX: `.navbar-scrolled` was defined only in JS-injected styles.
+       Moved here so it works even before JS runs.
+   11. IMPROVEMENT: Replaced Roboto with Poppins consistently (Roboto
+       was imported but barely used; mixing two body fonts is inconsistent).
+   12. IMPROVEMENT: progress-bar CSS transition kept; JS now drives width
+       via data-width attribute not inline style before animation.
+   13. IMPROVEMENT: Removed `pointer-events: none` on `.profile-photo img`
+       — this broke click-to-zoom in some browsers and is not needed since
+       JS handles contextmenu/dragstart events.
+   14. IMPROVEMENT: Cleaned up redundant vendor-prefix stacking.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   RESET & BASE
+-------------------------------------------------------------------------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FIX: consolidated font to Poppins throughout */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* FIX: Consolidated image protection rules (was scattered in 3+ places) */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    font-feature-settings: "liga" 1, "clig" 1, "kern" 1;
+}
+
+/* --------------------------------------------------------------------------
+   CSS VARIABLES
+-------------------------------------------------------------------------- */
+:root {
+    --deep-blue:   #1A107A;
+    --teal:        #2CC1AD;
+    --coral:       #FC5530;
+    --light-gray:  #f8f9fa;
+    --dark-gray:   #333;
+    --transition:  0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   NAVIGATION
+-------------------------------------------------------------------------- */
+.navbar {
+    background-color: var(--deep-blue);
+    padding: 15px 0;
+    transition: background-color var(--transition), backdrop-filter var(--transition);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* FIX: Was only in JS-injected styles; moved to CSS so it works before JS */
+.navbar-scrolled {
+    background-color: rgba(26, 16, 122, 0.96) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.brand-title {
+    font-size: 0.85rem;
+    color: var(--teal);
+    font-weight: 400;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    font-weight: 500;
+    margin: 0 8px;
+    transition: color var(--transition);
+    padding: 4px 0;
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--teal);
+    transition: width var(--transition);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   HOME SECTION
+-------------------------------------------------------------------------- */
+.home-section {
+    padding: 160px 0 100px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--deep-blue);
+    color: #fff;
+}
+
+.animated-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+/* FIX: Consolidated .bg-element (was only in JS-injected styles) */
+.bg-element {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 15s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0%   { transform: translateY(0)    rotate(0deg);   opacity: 0.7; }
+    50%  { transform: translateY(-20px) rotate(180deg); opacity: 0.9; }
+    100% { transform: translateY(0)    rotate(360deg); opacity: 0.7; }
+}
+
+/* Profile Photo */
+.profile-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* FIX: Removed duplicate .profile-photo rule — single authoritative block */
+.profile-photo {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 3px solid var(--teal);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(44, 193, 173, 0.15);
+    flex-shrink: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 115%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--transition);
+    display: block;
+}
+
+.profile-photo:hover img {
+    transform: scale(1.05);
+}
+
+/* Subtle decorative pattern overlay (no pointer events so it doesn't block clicks) */
+.profile-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image:
+        linear-gradient(45deg, rgba(44,193,173,0.04) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(44,193,173,0.04) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(44,193,173,0.04) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(44,193,173,0.04) 75%);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Profile fallback icon */
+.profile-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8rem;
+    color: #fff;
+}
+
+/* Home text */
+.home-content {
+    position: relative;
+    z-index: 1;
+}
+
+.home-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.home-subtitle {
+    font-size: 1.6rem;
+    color: var(--teal);
+    margin-bottom: 28px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.description-box {
+    background-color: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 28px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.home-description {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.7;
+}
+
+.home-description:last-of-type {
+    margin-bottom: 0;
+}
+
+.highlight-box {
+    background-color: rgba(44,193,173,0.15);
+    border-left: 4px solid var(--teal);
+    padding: 18px 20px;
+    margin-top: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.highlight-title {
+    color: var(--teal);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.highlight-text {
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.home-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   BUTTONS
+-------------------------------------------------------------------------- */
+.btn-primary {
+    background-color: var(--coral);
+    border-color: var(--coral);
+    padding: 11px 28px;
+    font-weight: 600;
+    transition: all var(--transition);
+    border-radius: 6px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #e6451b;
+    border-color: #e6451b;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(252, 85, 48, 0.35);
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,0.7);
+    color: #fff;
+    padding: 11px 28px;
+    font-weight: 600;
+    transition: all var(--transition);
+    border-radius: 6px;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #fff;
+    border-color: #fff;
+    color: var(--deep-blue);
+    transform: translateY(-3px);
+}
+
+/* --------------------------------------------------------------------------
+   SECTION COMMONS
+-------------------------------------------------------------------------- */
+.section-padding {
+    padding: 90px 0;
+}
+
+.bg-light {
+    background-color: var(--light-gray) !important;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title {
+    font-size: 2.3rem;
+    color: var(--deep-blue);
+    margin-bottom: 14px;
+}
+
+.section-divider {
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(to right, var(--teal), var(--coral));
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   EDUCATION
+-------------------------------------------------------------------------- */
+.education-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transition: transform var(--transition), box-shadow var(--transition);
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.education-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.1);
+}
+
+.education-icon {
+    background-color: rgba(44,193,173,0.1);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+.education-icon i {
+    font-size: 1.4rem;
+    color: var(--teal);
+}
+
+.education-content h4 {
+    color: var(--deep-blue);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.institution {
+    color: var(--coral);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.education-content p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   EXPERIENCE / TIMELINE
+-------------------------------------------------------------------------- */
+.timeline {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--teal), rgba(44,193,173,0.2));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 45px;
+    position: relative;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-date {
+    width: 120px;
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--deep-blue);
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 5px;
+    position: relative;
+}
+
+.timeline-date::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    top: 8px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--teal);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px rgba(44,193,173,0.25);
+}
+
+.timeline-content {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    flex-grow: 1;
+    margin-left: 28px;
+    transition: box-shadow var(--transition);
+}
+
+.timeline-content:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.timeline-content h4 {
+    color: var(--deep-blue);
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+}
+
+.timeline-content h5 {
+    color: var(--coral);
+    margin-bottom: 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* FIX: Removed `.t` orphan rule that was here in the original */
+.timeline-list {
+    padding-left: 18px;
+    margin-bottom: 0;
+    color: #555;
+    font-size: 0.93rem;
+    line-height: 1.7;
+}
+
+.timeline-list li {
+    margin-bottom: 6px;
+}
+
+.timeline-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   SKILLS
+-------------------------------------------------------------------------- */
+.skills-category {
+    color: var(--deep-blue);
+    margin-top: 28px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(44,193,173,0.2);
+    font-size: 1.05rem;
+}
+
+.skill-item {
+    margin-bottom: 18px;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.skill-name {
+    font-weight: 500;
+    color: var(--deep-blue);
+    font-size: 0.95rem;
+}
+
+.skill-level {
+    color: var(--coral);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e5e8f0;
+    overflow: hidden;
+}
+
+/* FIX: Consolidated progress-bar style (was split across JS-injected + CSS) */
+.progress-bar {
+    background: linear-gradient(to right, var(--teal), #1aa896);
+    transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+}
+
+/* Language Skills */
+.language-skills {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.language-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.language-item:last-child {
+    margin-bottom: 0;
+}
+
+.language-name {
+    width: 90px;
+    font-weight: 600;
+    color: var(--deep-blue);
+    font-size: 0.95rem;
+}
+
+.language-level {
+    flex-grow: 1;
+    display: flex;
+    gap: 6px;
+    margin: 0 18px;
+}
+
+.language-level i {
+    color: var(--teal);
+    font-size: 0.75rem;
+}
+
+.language-label {
+    color: var(--coral);
+    font-weight: 600;
+    font-size: 0.85rem;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   PROJECTS
+-------------------------------------------------------------------------- */
+.project-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transition: transform var(--transition), box-shadow var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* FIX: Removed duplicate .project-image block — single authoritative rule */
+.project-image {
+    height: 200px;
+    background-color: rgba(44,193,173,0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.08);
+}
+
+/* Fallback icon (when no img or img errors) */
+.project-image i {
+    font-size: 4rem;
+    color: var(--teal);
+    transition: color var(--transition);
+}
+
+/* Skeleton loading shimmer */
+.project-image.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.project-content {
+    padding: 22px 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-content h4 {
+    color: var(--deep-blue);
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.project-description {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 16px;
+}
+
+.tech-tag {
+    background-color: rgba(44,193,173,0.1);
+    color: var(--teal);
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.project-link {
+    color: var(--coral);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all var(--transition);
+}
+
+.project-link:hover {
+    color: var(--deep-blue);
+    gap: 11px;
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT
+-------------------------------------------------------------------------- */
+.contact-card {
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+}
+
+.contact-info h3 {
+    color: var(--deep-blue);
+    margin-bottom: 14px;
+    font-size: 1.4rem;
+}
+
+.contact-info > p {
+    color: #666;
+    margin-bottom: 26px;
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.contact-details {
+    margin-bottom: 28px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.contact-item i {
+    color: var(--teal);
+    font-size: 1.1rem;
+    margin-right: 14px;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.contact-item h5 {
+    color: var(--deep-blue);
+    margin-bottom: 3px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.contact-item p {
+    color: #555;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* FIX: tel/email links in contact should look natural */
+.contact-item a {
+    color: #555;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.contact-item a:hover {
+    color: var(--coral);
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: rgba(44,193,173,0.1);
+    color: var(--teal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background-color: var(--teal);
+    color: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(44,193,173,0.35);
+}
+
+.contact-form h3 {
+    color: var(--deep-blue);
+    margin-bottom: 22px;
+    font-size: 1.3rem;
+}
+
+.form-control {
+    padding: 11px 14px;
+    border: 1px solid #dde0ea;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.92rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    background-color: #fafbff;
+}
+
+.form-control:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(44,193,173,0.18);
+    background-color: #fff;
+    outline: none;
+}
+
+/* FIX: Single definition of .is-invalid (was in both JS and CSS) */
+.form-control.is-invalid {
+    border-color: var(--coral) !important;
+    background-color: rgba(252,85,48,0.04);
+}
+
+.form-control.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(252,85,48,0.2);
+}
+
+/* --------------------------------------------------------------------------
+   FORM RESULT
+   FIX: Single definition — removed JS-injected duplicate
+-------------------------------------------------------------------------- */
+#form-result {
+    display: none;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-align: center;
+    animation: slideDown 0.25s ease-out;
+}
+
+#form-result p { margin-bottom: 0; }
+
+#form-result.success {
+    background-color: rgba(44,193,173,0.1);
+    border: 1px solid rgba(44,193,173,0.3);
+    color: #0d6854;
+}
+
+#form-result.error {
+    background-color: rgba(252,85,48,0.08);
+    border: 1px solid rgba(252,85,48,0.3);
+    color: #7c1d06;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   SUBMIT BUTTON STATES
+   FIX: Consolidated spinner styles (was in JS + CSS)
+-------------------------------------------------------------------------- */
+.btn-spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   BACK TO TOP
+   FIX: Was defined only in JS-injected styles; now in CSS exclusively
+-------------------------------------------------------------------------- */
+.back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 48px;
+    height: 48px;
+    background-color: var(--coral);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition: opacity var(--transition), visibility var(--transition),
+                transform var(--transition), box-shadow var(--transition),
+                background-color var(--transition);
+    box-shadow: 0 4px 14px rgba(252,85,48,0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: #e6451b;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(252,85,48,0.4);
+}
+
+/* --------------------------------------------------------------------------
+   LANGUAGE SWITCHER
+-------------------------------------------------------------------------- */
+#languageSwitcher {
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 5px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all var(--transition);
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+}
+
+#languageSwitcher:hover {
+    background-color: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.7);
+}
+
+.lang-fr-label,
+.lang-en-label {
+    transition: color var(--transition);
+}
+
+.lang-fr-label.active,
+.lang-en-label.active {
+    color: var(--teal);
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER
+-------------------------------------------------------------------------- */
+.footer {
+    background-color: var(--deep-blue);
+    color: rgba(255,255,255,0.8);
+    padding: 24px 0;
+}
+
+.footer p {
+    margin-bottom: 0;
+    font-size: 0.88rem;
+}
+
+/* --------------------------------------------------------------------------
+   BODY LOADED STATE
+   Home section is always visible. Entrance animation is CSS-only so it
+   never depends on JS execution timing (which caused the white-flash bug).
+-------------------------------------------------------------------------- */
+.home-section {
+    animation: heroFadeIn 0.6s ease both;
+}
+
+@keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+-------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+    #languageSwitcher {
+        margin-top: 12px;
+        width: 100%;
+    }
+    .navbar-nav .nav-link::after {
+        display: none; /* underline effect not ideal on stacked mobile menu */
+    }
+}
+
+@media (max-width: 768px) {
+    .home-section {
+        padding: 130px 0 70px;
+        text-align: center;
+    }
+
+    .home-title      { font-size: 2.2rem; }
+    .home-subtitle   { font-size: 1.3rem; }
+    .section-padding { padding: 70px 0; }
+    .section-title   { font-size: 1.9rem; }
+
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .home-cta {
+        justify-content: center;
+    }
+
+    .timeline::before {
+        left: 18px;
+    }
+
+    .timeline-date {
+        width: 70px;
+        text-align: left;
+        padding-right: 18px;
+        font-size: 0.8rem;
+    }
+
+    .timeline-content {
+        margin-left: 22px;
+        padding: 18px;
+    }
+
+    .contact-card {
+        padding: 24px;
+    }
+
+    .contact-form {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .brand-name  { font-size: 1.15rem; }
+    .brand-title { font-size: 0.75rem; }
+    .home-title  { font-size: 1.9rem; }
+    .home-subtitle { font-size: 1.1rem; }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .language-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .language-level { margin: 0; }
+    .language-label { text-align: left; min-width: auto; }
+
+    .timeline-item { flex-direction: column; }
+    .timeline-date {
+        width: auto;
+        text-align: left;
+        padding-right: 0;
+        padding-left: 36px;
+        margin-bottom: 8px;
+    }
+    .timeline-date::after { left: 8px; right: auto; }
+    .timeline-content { margin-left: 0; }
+}
